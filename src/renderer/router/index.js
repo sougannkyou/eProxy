@@ -7,14 +7,14 @@ import proxyRule from '../components/rule.vue'
 Vue.use(Router)
 
 const routes = [
-    {path: '/', component: require('@/components/LandingPage').default},
-    // {path: '/network', component: proxyNetwork},
-    {path: '/rule', component: proxyRule},
-    // {path: '/mock', component: proxyMock}
+  {path: '/', component: require('@/components/LandingPage').default},
+  // {path: '/network', component: proxyNetwork},
+  {path: '/rule', component: proxyRule},
+  // {path: '/mock', component: proxyMock}
 ];
 
 export default new Router({
-    routes
+  routes
 });
 
 // export default new Router({

@@ -1,11 +1,14 @@
-import { app, BrowserWindow } from 'electron'
+import {app, BrowserWindow} from 'electron'
 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
+  console.info('<<< development >>>')
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+} else {
+  console.info('<<< production >>>')
 }
 
 let mainWindow
@@ -13,7 +16,7 @@ const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
 
-function createWindow () {
+function createWindow() {
   /**
    * Initial window options
    */
@@ -24,6 +27,7 @@ function createWindow () {
   })
 
   mainWindow.loadURL(winURL)
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => {
     mainWindow = null

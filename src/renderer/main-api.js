@@ -2,10 +2,10 @@
 /**
  * proxy 的接口封装，用于主进程与渲染进程之间数据通信
  */
-const util = require('./lib/util');
+const util = require('../lib/util');
 const ip = require('ip');
-const packageInfo = require('./package.json');
-const ProxyServer = require('./proxy.js').ProxyServer;
+// const packageInfo = require('../package.json');
+const ProxyServer = require('../main/proxy').ProxyServer;
 const path = require('path');
 const fs = require('fs');
 const mockjs = require('mockjs');
@@ -19,7 +19,7 @@ const ruleSamplePath = __dirname + '/rule_sample';
 const mockProjectsFile = __dirname + '/mock-project.json';
 const mockCustomPath = __dirname + '/mock_custom';
 
-const certMgr = require('./proxy.js').utils.certMgr;
+const certMgr = require('../main/proxy.js').utils.certMgr;
 const exec = require('child_process').exec;
 
 const MSG_HAD_OPEN_PROXY = 'MSG_HAD_OPEN_PROXY';
@@ -76,7 +76,7 @@ function combineRuleAndMock(ruleid, mocks) {
             }
         }
     });
-    
+
 }
 
 //proxy工厂
@@ -176,7 +176,7 @@ module.exports = {
                 reject();
             }
         });
-        
+
     },
     fetchBody(id) {
         let self = this;
@@ -292,7 +292,7 @@ module.exports = {
         if (!fs.existsSync(ruleCustomPath)) {
             fs.mkdir(ruleCustomPath);
         }
-        
+
         const rulepath = path.resolve(ruleCustomPath, filename);
 
         fs.writeFile(rulepath, rule, 'utf8', (err) => {
@@ -377,7 +377,7 @@ module.exports = {
             if (!fs.existsSync(mockCustomPath)) {
                 fs.mkdir(mockCustomPath);
             }
-            
+
             const mockpath = path.resolve(mockCustomPath, filename);
 
             fs.writeFile(mockpath, JSON.stringify(paths), 'utf8', (err) => {
